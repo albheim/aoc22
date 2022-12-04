@@ -109,9 +109,21 @@ CrZsJsPPZsGzwwsLwLmpwMDw";
 
     #[test]
     fn real_a() {
+        let input = fs::read_to_string("data/day03.txt")
+            .expect("Should have been able to read the file");
+
+        let result = run_a(&input);
+
+        assert_eq!(result, 8252);
     }
 
     #[test]
     fn real_b() {
+        let input = fs::read_to_string("data/day03.txt")
+            .expect("Should have been able to read the file");
+
+        let result = run_b(&input);
+
+        assert_eq!(result, 2828);
     }
 }
