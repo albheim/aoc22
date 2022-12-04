@@ -13,7 +13,7 @@ fn priority(c: char) -> u64 {
 }
 
 fn overlap(a: &[u64], b: &[u64]) -> Vec<u64> {
-    a.iter().filter(|i| b.contains(i)).map(|i| *i).collect()
+    a.iter().filter(|i| b.contains(i)).cloned().collect()
 }
 
 fn run_a(input: &str) -> u64 {
