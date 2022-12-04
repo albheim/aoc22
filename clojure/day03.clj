@@ -28,7 +28,7 @@
 
 (run-a (parse test-data))
 
-(run-a (slurp "data/day03.txt"))
+(run-a (parse (slurp "data/day03.txt")))
 
 (defn find-intersection [backpacks]
   ; Find intersection over all backpacks in input
@@ -40,5 +40,8 @@
 
 (run-b (parse test-data))
 
-(run-b (slurp "data/day03.txt"))
+(run-b (parse (slurp "data/day03.txt")))
 
+(println 
+  "Part a:" (run-a (parse (slurp "data/day03.txt")))
+  "\nPart b:" (run-b (parse (slurp "data/day03.txt"))))

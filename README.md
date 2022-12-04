@@ -11,7 +11,7 @@ From the root directory run
 where XX is they day (number 01-25) and Y is the problem (a or b).
 
 ### Clojure
-I only run this interactively in the lein REPL. 
+I only run this interactively in the lein REPL, though it can be run as a script from the repo root or being included in a REPL session with `(load-file "clojure/dayXX.clj")`.
 
 ### Julia 
 I run this interactively, but can also be run with `julia julia/dayXX.jl Y`.
