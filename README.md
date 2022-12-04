@@ -19,4 +19,4 @@ I run this interactively, but can also be run with `julia julia/dayXX.jl Y`.
 ## Notes
 
 * Compile to WASM and build simple html frontend to see how we can run it through the browser?
-* Have everything in lib, and bin just launches function? Then tests could be used for performance.
+* Have everything in lib, and bin just launches function? Then tests could be used for performance benchmarks.
