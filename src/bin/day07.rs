@@ -15,13 +15,12 @@ struct Inode {
 
 impl Inode {
     fn build(input: &str) -> Rc<RefCell<Inode>> {
-        let root = Rc::new(RefCell::new(
-            Inode {
-                parent: None,
-                size: 0,
-                contents: HashMap::new(),
-                isfile: false,
-            }));
+        let root = Rc::new(RefCell::new(Inode {
+            parent: None,
+            size: 0,
+            contents: HashMap::new(),
+            isfile: false,
+        }));
         let mut currdir = Rc::clone(&root);
 
         for line in input.lines() {
@@ -61,14 +60,14 @@ impl Inode {
         root
     }
 
-    fn size(&self) -> (u64, Vec<u64>) {
+    fn folder_sizes(&self) -> (u64, Vec<u64>) {
         let mut folder_size = 0;
         let mut all_folder_sizes = Vec::new();
         for f in self.contents.values() {
             if f.borrow().isfile {
                 folder_size += f.borrow().size;
             } else {
-                let (fsize, mut all_sizes) = f.borrow().size();
+                let (fsize, mut all_sizes) = f.borrow().folder_sizes();
                 folder_size += fsize;
                 all_folder_sizes.append(&mut all_sizes);
             }
@@ -80,13 +79,13 @@ impl Inode {
 
 fn run_a(input: &str) -> u64 {
     let root = Inode::build(input);
-    let (_, folder_sizes) = root.borrow().size();
+    let (_, folder_sizes) = root.borrow().folder_sizes();
     folder_sizes.iter().filter(|&x| *x <= 100000).sum()
 }
 
 fn run_b(input: &str) -> u64 {
     let root = Inode::build(input);
-    let (root_size, folder_sizes) = root.borrow().size();
+    let (root_size, folder_sizes) = root.borrow().folder_sizes();
     let unused = 70_000_000 - root_size;
     let to_free = 30_000_000 - unused;
 
