@@ -10,6 +10,8 @@ From the root directory run
 `cargo run bin --dayXX Y`
 where XX is they day (number 01-25) and Y is the problem (a or b).
 
+Run `./time.sh` to time the execution for the release builds of all the scripts.
+
 ### Clojure
 I only run this interactively in the lein REPL, though it can be run as a script from the repo root or being included in a REPL session with `(load-file "clojure/dayXX.clj")`.
 
