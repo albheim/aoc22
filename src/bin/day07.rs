@@ -28,9 +28,9 @@ impl Inode {
             match (command[0], command[1]) {
                 ("$", "cd") => {
                     currdir = match command[2] {
-                        ".." => Rc::clone(&currdir.borrow().parent.as_ref().unwrap()),
+                        ".." => Rc::clone(currdir.borrow().parent.as_ref().unwrap()),
                         "/" => Rc::clone(&root),
-                        x => Rc::clone(currdir.borrow_mut().contents.get(x).unwrap()),
+                        x => Rc::clone(currdir.borrow().contents.get(x).unwrap()),
                     };
                 }, 
                 ("$", "ls") => (),
