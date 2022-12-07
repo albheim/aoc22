@@ -26,34 +26,35 @@ impl Inode {
 
         for line in input.lines() {
             let command: Vec<&str> = line.split(' ').collect();
-            if command[0] == "$" {
-                if command[1] == "cd" {
+            match (command[0], command[1]) {
+                ("$", "cd") => {
                     currdir = match command[2] {
                         ".." => Rc::clone(&currdir.borrow().parent.as_ref().unwrap()),
                         "/" => Rc::clone(&root),
                         x => Rc::clone(currdir.borrow_mut().contents.get(x).unwrap()),
-                    }
-                }
-            } else if !currdir.borrow().contents.contains_key(command[1]) {
-                if command[0] == "dir" {
+                    };
+                }, 
+                ("$", "ls") => (),
+                ("dir", name) => {
                     currdir.borrow_mut().contents.insert(
-                        String::from(command[1]), 
+                        String::from(name), 
                         Rc::new(RefCell::new(Inode { 
                             isfile: false,
                             size: 0,
                             contents: HashMap::new(),
                             parent: Some(Rc::clone(&currdir)),
                         })));
-                } else {
+                    },
+                (size, name) => {
                     currdir.borrow_mut().contents.insert(
-                        String::from(command[1]), 
+                        String::from(name), 
                         Rc::new(RefCell::new(Inode { 
                             isfile: true,
-                            size: str::parse::<u64>(command[0]).unwrap(),
+                            size: str::parse::<u64>(size).unwrap(),
                             contents: HashMap::new(),
                             parent: Some(Rc::clone(&currdir)),
                         })));
-                }
+                    },
             }
         }
 
