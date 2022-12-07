@@ -1,4 +1,4 @@
-use std::{env};
+use std::env;
 use aoc22::read_data;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -106,7 +106,7 @@ fn main() {
 }
 
 #[cfg(test)]
-mod day03_tests {
+mod day07_tests {
     use super::*;
     use aoc22::read_test;
 

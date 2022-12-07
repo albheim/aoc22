@@ -1,5 +1,8 @@
-use std::{env, fs};
+use std::env;
+use aoc22::read_data;
 use partial_sort::PartialSort;
+
+const DAY: &str = "day01";
 
 fn parse(input: &str) -> Vec<u64> {
     let mut total_carry: Vec<u64> = vec![0];
@@ -35,8 +38,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let version = &args[1];
 
-    let input = fs::read_to_string("data/day01.txt")
-        .expect("Should have been able to read the file");
+    let input = read_data(DAY);
 
     match version.as_str() {
         "a" => println!("Answer: {}", run_a(&input)),
@@ -48,34 +50,29 @@ fn main() {
 #[cfg(test)]
 mod day01_tests {
     use super::*;
+    use aoc22::read_test;
 
     #[test]
     fn test_a() {
-        let input = "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000";
-        let result = run_a(input);
-        assert_eq!(result, 24000)
+        let result = run_a(&read_test(DAY));
+        assert_eq!(result, 24000);
     }
 
     #[test]
     fn test_b() {
-        let input = "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000";
-        let result = run_b(input);
-        assert_eq!(result, 45000)
+        let result = run_b(&read_test(DAY));
+        assert_eq!(result, 45000);
     }
 
     #[test]
     fn real_a() {
-        let input = fs::read_to_string("data/day01.txt")
-            .expect("Should have been able to read the file");
-        let result = run_a(&input);
-        assert_eq!(result, 70296)
+        let result = run_a(&read_data(DAY));
+        assert_eq!(result, 70296);
     }
 
     #[test]
     fn real_b() {
-        let input = fs::read_to_string("data/day01.txt")
-            .expect("Should have been able to read the file");
-        let result = run_b(&input);
-        assert_eq!(result, 205381)
+        let result = run_b(&read_data(DAY));
+        assert_eq!(result, 205381);
     }
 }

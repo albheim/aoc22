@@ -1,4 +1,7 @@
-use std::{env, fs};
+use std::env;
+use aoc22::read_data;
+
+const DAY: &str = "day06";
 
 fn all_different(a: &Vec<char>) -> bool {
     for i in 0..a.len() {
@@ -38,8 +41,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let version = &args[1];
 
-    let input = fs::read_to_string("data/day06.txt")
-        .expect("Should have been able to read the file");
+    let input = read_data(DAY);
 
     match version.as_str() {
         "a" => println!("Answer: {}", run_a(&input)),
@@ -49,43 +51,31 @@ fn main() {
 }
 
 #[cfg(test)]
-mod day03_tests {
+mod day06_tests {
     use super::*;
+    use aoc22::read_test;
 
     #[test]
     fn test_a() {
-        assert_eq!(run_a("bvwbjplbgvbhsrlpgdmjqwftvncz"), 5);
-        assert_eq!(run_a("nppdvjthqldpwncqszvftbrmjlhg"), 6);
-        assert_eq!(run_a("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 10);
-        assert_eq!(run_a("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 11);
+        let result: Vec<u64> = read_test(DAY).lines().map(run_a).collect();
+        assert_eq!(result, vec![5, 6, 10, 11]);
     }
 
     #[test]
     fn test_b() {
-        assert_eq!(run_a("mjqjpqmgbljsphdztnvjfqwrcgsmlb"), 19);
-        assert_eq!(run_a("bvwbjplbgvbhsrlpgdmjqwftvncz"), 23);
-        assert_eq!(run_a("nppdvjthqldpwncqszvftbrmjlhg"), 23);
-        assert_eq!(run_a("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 29);
-        assert_eq!(run_a("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 26);
+        let result: Vec<u64> = read_test(DAY).lines().map(run_b).collect();
+        assert_eq!(result, vec![23, 23, 29, 26]);
     }
 
     #[test]
     fn real_a() {
-        let input = fs::read_to_string("data/day06.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_a(&input);
-
+        let result = run_a(&read_data(DAY));
         assert_eq!(result, 1766);
     }
 
     #[test]
     fn real_b() {
-        let input = fs::read_to_string("data/day06.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_b(&input);
-
+        let result = run_b(&read_data(DAY));
         assert_eq!(result, 2383);
     }
 }

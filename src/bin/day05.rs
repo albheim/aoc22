@@ -1,5 +1,7 @@
-use std::{env, fs};
-use aoc22::split_line;
+use std::env;
+use aoc22::{split_line, read_data};
+
+const DAY: &str = "day05";
 
 struct CrateStacks {
     stacks: Vec<Vec<char>>
@@ -86,8 +88,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let version = &args[1];
 
-    let input = fs::read_to_string("data/day05.txt")
-        .expect("Should have been able to read the file");
+    let input = read_data(DAY);
 
     match version.as_str() {
         "a" => println!("Answer: {}", run_a(&input)),
@@ -97,60 +98,31 @@ fn main() {
 }
 
 #[cfg(test)]
-mod day03_tests {
+mod day05_tests {
     use super::*;
+    use aoc22::read_test;
 
     #[test]
     fn test_a() {
-        let input = "    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
-
-move 1 from 2 to 1
-move 3 from 1 to 3
-move 2 from 2 to 1
-move 1 from 1 to 2";
-
-        let result = run_a(input);
-
+        let result = run_a(&read_test(DAY));
         assert_eq!(result, "CMZ");
     }
 
     #[test]
     fn test_b() {
-        let input = "    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
-
-move 1 from 2 to 1
-move 3 from 1 to 3
-move 2 from 2 to 1
-move 1 from 1 to 2";
-
-        let result = run_b(input);
-
+        let result = run_b(&read_test(DAY));
         assert_eq!(result, "MCD");
     }
 
     #[test]
     fn real_a() {
-        let input = fs::read_to_string("data/day05.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_a(&input);
-
+        let result = run_a(&read_data(DAY));
         assert_eq!(result, "ZBDRNPMVH");
     }
 
     #[test]
     fn real_b() {
-        let input = fs::read_to_string("data/day05.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_b(&input);
-
+        let result = run_b(&read_data(DAY));
         assert_eq!(result, "WDLPFNNNB");
     }
 }

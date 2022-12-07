@@ -1,4 +1,7 @@
-use std::{env, fs};
+use std::env;
+use aoc22::read_data;
+
+const DAY: &str = "day02";
 
 fn parse(input: &str) -> impl Iterator<Item = (char, char)> + '_ {
     input.lines()
@@ -44,8 +47,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let version = &args[1];
 
-    let input = fs::read_to_string("data/day02.txt")
-        .expect("Should have been able to read the file");
+    let input = read_data(DAY);
 
     match version.as_str() {
         "a" => println!("Answer: {}", run_a(&input)),
@@ -57,38 +59,29 @@ fn main() {
 #[cfg(test)]
 mod day02_tests {
     use super::*;
+    use aoc22::read_test;
 
     #[test]
     fn test_a() {
-        let input = "A Y\nB X\nC Z";
-        let result: Vec<u64> = parse(input).map(|(a, b)| score_a(a, b)).collect();
-
-        assert_eq!(result, vec![8, 1, 6])
+        let result = run_a(&read_test(DAY));
+        assert_eq!(result, 15);
     }
 
     #[test]
     fn test_b() {
-        let input = "A Y\nB X\nC Z";
-        let result: Vec<u64> = parse(input).map(|(a, b)| score_b(a, b)).collect();
-
-        assert_eq!(result, vec![4, 1, 7])
+        let result = run_b(&read_test(DAY));
+        assert_eq!(result, 12);
     }
 
     #[test]
     fn real_a() {
-        let input = fs::read_to_string("data/day02.txt")
-            .expect("Should have been able to read the file");
-        let result = run_a(&input);
-
-        assert_eq!(result, 11841)
+        let result = run_a(&read_data(DAY));
+        assert_eq!(result, 11841);
     }
 
     #[test]
     fn real_b() {
-        let input = fs::read_to_string("data/day02.txt")
-            .expect("Should have been able to read the file");
-        let result = run_b(&input);
-
-        assert_eq!(result, 13022)
+        let result = run_b(&read_data(DAY));
+        assert_eq!(result, 13022);
     }
 }

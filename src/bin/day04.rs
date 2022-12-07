@@ -1,5 +1,7 @@
-use std::{env, fs};
-use aoc22::split_line;
+use std::env;
+use aoc22::{split_line, read_data};
+
+const DAY: &str = "day04";
 
 fn parse(line: &str) -> ((u64, u64), (u64, u64)) {
     let result: Vec<u64> = split_line(line, "{}-{},{}-{}")
@@ -41,8 +43,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let version = &args[1];
 
-    let input = fs::read_to_string("data/day04.txt")
-        .expect("Should have been able to read the file");
+    let input = read_data(DAY);
 
     match version.as_str() {
         "a" => println!("Answer: {}", run_a(&input)),
@@ -52,44 +53,31 @@ fn main() {
 }
 
 #[cfg(test)]
-mod day03_tests {
+mod day04_tests {
     use super::*;
+    use aoc22::read_test;
 
     #[test]
     fn test_a() {
-        let input = "2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8";
-
-        let result = run_a(input);
-
+        let result = run_a(&read_test(DAY));
         assert_eq!(result, 2);
     }
 
     #[test]
     fn test_b() {
-        let input = "2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8";
-
-        let result = run_b(input);
-
+        let result = run_b(&read_test(DAY));
         assert_eq!(result, 4);
     }
 
     #[test]
     fn real_a() {
-        let input = fs::read_to_string("data/day04.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_a(&input);
-
+        let result = run_a(&read_data(DAY));
         assert_eq!(result, 534);
     }
 
     #[test]
     fn real_b() {
-        let input = fs::read_to_string("data/day04.txt")
-            .expect("Should have been able to read the file");
-
-        let result = run_b(&input);
-
+        let result = run_b(&read_data(DAY));
         assert_eq!(result, 841);
     }
 }

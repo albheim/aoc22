@@ -1,4 +1,5 @@
-(def test-data "vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw\n")
+(def test-data (slurp "data/day03.test"))
+(def real-data (slurp "data/day03.data"))
 
 (defn priority [c]
   ; Take a character and return the priority of that item
@@ -28,7 +29,7 @@
 
 (run-a (parse test-data))
 
-(run-a (parse (slurp "data/day03.txt")))
+(run-a (parse real-data))
 
 (defn find-intersection [backpacks]
   ; Find intersection over all backpacks in input
@@ -40,8 +41,8 @@
 
 (run-b (parse test-data))
 
-(run-b (parse (slurp "data/day03.txt")))
+(run-b (parse real-data))
 
 (println 
-  "Part a:" (run-a (parse (slurp "data/day03.txt")))
-  "\nPart b:" (run-b (parse (slurp "data/day03.txt"))))
+  "Part a:" (run-a (parse real-data))
+  "\nPart b:" (run-b (parse real-data)))
