@@ -1,3 +1,4 @@
+use std::fs;
 /// Assumes the input is "nice", just made to work good enough.
 pub fn split_line<'a>(string: &'a str, pattern: &str) -> Result<Vec<&'a str>, &'static str> {
     let mut results = vec![];
@@ -25,6 +26,13 @@ pub fn split_line<'a>(string: &'a str, pattern: &str) -> Result<Vec<&'a str>, &'
     Ok(results) 
 }
 
+pub fn read_data(day: &str) -> String {
+    fs::read_to_string(format!("data/{day}.data")).expect("File not found.")
+}
+
+pub fn read_test(day: &str) -> String {
+    fs::read_to_string(format!("data/{day}.test")).expect("File not found.")
+}
 
 #[cfg(test)]
 mod tests {
