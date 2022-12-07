@@ -30,4 +30,3 @@
 (run-b (parse test-data))
 
 (println "Part b:" (run-b (parse real-data)))
-

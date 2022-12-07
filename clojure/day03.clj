@@ -1,5 +1,6 @@
-(def test-data (slurp "data/day03.test"))
-(def real-data (slurp "data/day03.data"))
+(def day "day03")
+(def test-data (slurp (reduce str ["data/" day ".test"])))
+(def real-data (slurp (reduce str ["data/" day ".data"])))
 
 (defn priority [c]
   ; Take a character and return the priority of that item
