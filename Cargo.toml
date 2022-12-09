@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 partial_sort = "0.1.2"
+parseline = { git = "https://github.com/albheim/parseline" }

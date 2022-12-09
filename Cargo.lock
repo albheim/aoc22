@@ -6,8 +6,14 @@ version = 3
 name = "aoc22"
 version = "0.1.0"
 dependencies = [
+ "parseline",
  "partial_sort",
 ]
+
+[[package]]
+name = "parseline"
+version = "0.1.0"
+source = "git+https://github.com/albheim/parseline#0c297f0bcdab4abed396fff8cc0f96aa7d6c83ab"
 
 [[package]]
 name = "partial_sort"
