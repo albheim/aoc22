@@ -41,7 +41,7 @@ Total: .036772042 seconds
 I only run this interactively in the lein REPL, though it can be run as a script from the repo root or being included in a REPL session with `(load-file "clojure/dayXX.clj")`.
 
 ### Julia 
-I run this interactively, but can also be run with `julia julia/dayXX.jl Y`.
+I run this interactively, but can also be run with `julia julia/dayXX.jl`.
 
 ## Notes
 
