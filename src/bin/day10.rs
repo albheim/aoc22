@@ -1,6 +1,5 @@
 use std::env;
 use aoc22::read_data;
-use parseline::parseln;
 
 const DAY: &str = "day10";
 
@@ -9,16 +8,16 @@ enum Instruction {
     Noop,
 }
 
-struct CPU {
+struct Cpu {
     register: i64,
     cycle: i64,
     instruction: Instruction,
     iterations: i64,
 }
 
-impl CPU {
+impl Cpu {
     fn new() -> Self {
-        CPU { 
+        Cpu { 
             register: 1, 
             cycle: 1, 
             instruction: Instruction::Noop, 
@@ -51,7 +50,7 @@ impl CPU {
 }
 
 fn run_a(input: &str) -> i64 {
-    let mut cpu = CPU::new();
+    let mut cpu = Cpu::new();
     let mut signal_strength = 0;
     for line in input.lines() {
         cpu.set_instruction(line);
@@ -68,7 +67,7 @@ fn run_a(input: &str) -> i64 {
 }
 
 fn run_b(input: &str) -> String {
-    let mut cpu = CPU::new();
+    let mut cpu = Cpu::new();
     let mut screen: String = String::from("");
     for line in input.lines() {
         cpu.set_instruction(line);
