@@ -15,26 +15,32 @@ The goal is to keep the total under 1 second.
 
 ```
 Running individual
-day01a: .003240754 seconds
-day01b: .004567574 seconds
-day02a: .003123273 seconds
-day02b: .004573721 seconds
-day03a: .003215318 seconds
-day03b: .004886804 seconds
-day04a: .003394494 seconds
-day04b: .005017601 seconds
-day05a: .007347329 seconds
-day05b: .007845915 seconds
-day06a: .005269918 seconds
-day06b: .006309376 seconds
-day07a: .004375795 seconds
-day07b: .006059083 seconds
-day08a: .010002792 seconds
-day08b: .005799080 seconds
-day09a: .005946728 seconds
-day09b: .006576986 seconds
+day01a: .002731227 seconds
+day01b: .004126877 seconds
+day02a: .003301529 seconds
+day02b: .005724194 seconds
+day03a: .003913865 seconds
+day03b: .008602617 seconds
+day04a: .005485742 seconds
+day04b: .005960392 seconds
+day05a: .003934152 seconds
+day05b: .004895211 seconds
+day06a: .003388487 seconds
+day06b: .005647660 seconds
+day07a: .004257577 seconds
+day07b: .005746447 seconds
+day08a: .004624830 seconds
+day08b: .005601862 seconds
+day09a: .005300220 seconds
+day09b: .008312008 seconds
+day10a: .003603243 seconds
+day10b: .005278930 seconds
+day11a: .004016940 seconds
+day11b: .013537020 seconds
+day12a: .004025859 seconds
+day12b: .005743775 seconds
 Running all
-Total: .036772042 seconds
+Total: .059686830 seconds
 ```
 
 ### Clojure
