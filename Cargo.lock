@@ -8,6 +8,7 @@ version = "0.1.0"
 dependencies = [
  "parseline",
  "partial_sort",
+ "queues",
 ]
 
 [[package]]
@@ -20,3 +21,9 @@ name = "partial_sort"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "00cf940f4ef65cb3c91884b1897d846adbdd54896b2db1936a23e43526b59c91"
+
+[[package]]
+name = "queues"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1475abae4f8ad4998590fe3acfe20104f0a5d48fc420c817cd2c09c3f56151f0"
