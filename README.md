@@ -15,36 +15,36 @@ The goal is to keep the total under 1 second.
 
 ```
 Running individual
-day01a: .002847715 seconds
-day01b: .004066580 seconds
-day02a: .002845375 seconds
-day02b: .004002992 seconds
-day03a: .003129370 seconds
-day03b: .004642451 seconds
-day04a: .003884889 seconds
-day04b: .004963463 seconds
-day05a: .003271334 seconds
-day05b: .005545138 seconds
-day06a: .003217793 seconds
-day06b: .006004574 seconds
-day07a: .004234682 seconds
-day07b: .005534068 seconds
-day08a: .003785911 seconds
-day08b: .005902191 seconds
-day09a: .005648532 seconds
-day09b: .006937284 seconds
-day10a: .002854194 seconds
-day10b: .005736872 seconds
-day11a: .002965191 seconds
-day11b: .013141383 seconds
-day12a: .003741466 seconds
-day12b: .004607043 seconds
-day13a: .003727160 seconds
-day13b: .005470753 seconds
-day14a: .007654738 seconds
-day14b: .130029328 seconds
+day01a: .003418518 seconds
+day01b: .005495567 seconds
+day02a: .004095584 seconds
+day02b: .005723129 seconds
+day03a: .003571431 seconds
+day03b: .004787076 seconds
+day04a: .004274599 seconds
+day04b: .005927151 seconds
+day05a: .004172499 seconds
+day05b: .004871803 seconds
+day06a: .003372952 seconds
+day06b: .004608243 seconds
+day07a: .003361521 seconds
+day07b: .005312975 seconds
+day08a: .003458365 seconds
+day08b: .005724442 seconds
+day09a: .004818322 seconds
+day09b: .008248033 seconds
+day10a: .003285266 seconds
+day10b: .005485463 seconds
+day11a: .003628559 seconds
+day11b: .012957232 seconds
+day12a: .003674779 seconds
+day12b: .006322531 seconds
+day13a: .004382679 seconds
+day13b: .006866511 seconds
+day14a: .005363694 seconds
+day14b: .014036432 seconds
 Running all
-Total: .202321371 seconds
+Total: .070116435 seconds
 ```
 
 ### Clojure
