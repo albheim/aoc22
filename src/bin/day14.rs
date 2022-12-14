@@ -3,10 +3,11 @@ use aoc22::read_data;
 use std::collections::HashMap;
 use std::str::FromStr;
 use std::hash::Hash;
+use std::fmt;
 
 const DAY: &str = "day14";
 
-#[derive(Eq, PartialEq, Hash, Clone, Debug)]
+#[derive(Eq, PartialEq, Hash, Clone)]
 struct Point {
     x: i64, 
     y: i64,
@@ -26,13 +27,11 @@ impl FromStr for Point {
     }
 }
 
-#[derive(Debug)]
 enum Material {
     Rock,
     Sand
 }
 
-#[derive(Debug)]
 struct Map {
     tiles: HashMap<Point, Material>,
     sand_origin: Point,
@@ -53,10 +52,8 @@ impl Map {
                 } else {
                     points[i].x..=points[i-1].x
                 };
+                bottom = std::cmp::max(bottom, points[i].y);
                 let yrange = if points[i-1].y < points[i].y {
-                    if bottom < points[i].y {
-                        bottom = points[i].y;
-                    }
                     points[i-1].y..=points[i].y
                 } else {
                     points[i].y..=points[i-1].y
@@ -86,7 +83,6 @@ impl Map {
                     if self.tiles.contains_key(&sand) {
                         sand.x -= 1;
                         sand.y -= 1;
-                        println!("sand hit {:?}", sand);
                         self.tiles.insert(sand, Material::Sand);
                         return true;
                     }
@@ -96,7 +92,33 @@ impl Map {
         false
     }
 
-    fn print(&self) {
+    fn drop_sand_floor(&mut self) -> bool {
+        let mut sand = self.sand_origin.clone();
+        while sand.y < self.bottom + 1 {
+            sand.y += 1;
+            if self.tiles.contains_key(&sand) {
+                sand.x -= 1;
+                if self.tiles.contains_key(&sand) {
+                    sand.x += 2;
+                    if self.tiles.contains_key(&sand) {
+                        sand.x -= 1;
+                        sand.y -= 1;
+                        if sand == self.sand_origin {
+                            return false
+                        }
+                        break
+                    }
+                }
+            }
+        }
+        self.tiles.insert(sand, Material::Sand);
+        true
+    }
+
+}
+
+impl fmt::Display for Map {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut xmin = i64::MAX;
         let mut xmax = i64::MIN;
         for pos in self.tiles.keys() {
@@ -111,17 +133,18 @@ impl Map {
             for x in xmin..=xmax {
                 let p = Point { x, y };
                 if p == self.sand_origin {
-                    print!("S");
+                    write!(f, "S")?;
                 } else {
                     match self.tiles.get(&p) {
-                        Some(Material::Rock) => print!("#"),
-                        Some(Material::Sand) => print!("o"),
-                        None => print!("."),
+                        Some(Material::Rock) => write!(f, "#")?,
+                        Some(Material::Sand) => write!(f, "o")?,
+                        None => write!(f, ".")?,
                     }
                 }
             }
-            println!();
+            writeln!(f)?;
         }
+        Ok(())
     }
 }
 
@@ -130,14 +153,17 @@ fn run_a(input: &str) -> usize {
     let mut count = 0;
     while map.drop_sand() {
         count += 1;
-        println!("count is now {count}");
-        map.print();
     }
     count
 }
 
 fn run_b(input: &str) -> usize {
-    0
+    let mut map = Map::build(input);
+    let mut count = 0;
+    while map.drop_sand_floor() {
+        count += 1;
+    }
+    count + 1
 }
 
 fn main() {
@@ -167,18 +193,18 @@ mod day08_tests {
     #[test]
     fn real_a() {
         let result = run_a(&read_data(DAY));
-        assert_eq!(result, 5625);
+        assert_eq!(result, 817);
     }
 
     #[test]
     fn test_b() {
         let result = run_b(&read_test(DAY));
-        //assert_eq!(result, 140);
+        assert_eq!(result, 93);
     }
 
     #[test]
     fn real_b() {
         let result = run_b(&read_data(DAY));
-        //assert_eq!(result, 23111);
+        assert_eq!(result, 23111);
     }
 }
