@@ -99,10 +99,7 @@ fn contains(sensors: &[Sensor], p: Point) -> bool {
 fn run_b(input: &str, upper: i64) -> i64 {
     let sensors = Sensor::build(input);
 
-    if contains(&sensors, Point{ x: upper, y: 0 }) {
-        return upper * 4000000
-    }
-    for sens in sensors.iter() {
+    for sens in &sensors {
         let mut p = sens.pos;
         p.x -= sens.dist + 1;
         if p.x < 0 {
@@ -122,7 +119,9 @@ fn run_b(input: &str, upper: i64) -> i64 {
             p.y += 1;
         }
     }
-    panic!("Shouldn't happen");
+
+    // Only we don't check, so has to be answer if we didn't find yet
+    upper * 4000000
 }
 
 fn main() {
