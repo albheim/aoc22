@@ -92,36 +92,26 @@ fn run_a(input: &str, y: i64) -> usize {
     sensor_coverage.count() - beacons
 }
 
-fn contains(sensors: &[Sensor], p: Point) -> bool {
-    sensors.iter().all(|sens| !sens.contains(&p))
-}
-
 fn run_b(input: &str, upper: i64) -> i64 {
     let sensors = Sensor::build(input);
 
-    for sens in &sensors {
+    sensors.iter().find_map(|sens| {
         let mut p = sens.pos;
         p.x -= sens.dist + 1;
-        if p.x < 0 {
-            p.y -= p.x;
-            p.x = 0;
-        }
-        if p.y < 0 {
-            p.x -= p.y;
-            p.y = 0;
-        }
+        let shift_start = i64::max(0, -i64::min(p.x, p.y));
+        p.x += shift_start;
+        p.y += shift_start;
         let dist = i64::min(sens.dist + 1, upper - i64::max(p.x, p.y));
-        for _ in 0..=dist {
-            if contains(&sensors, p) {
-                return p.x * 4000000 + p.y
-            }
-            p.x += 1;
-            p.y += 1;
-        }
-    }
 
-    // Only we don't check, so has to be answer if we didn't find yet
-    upper * 4000000
+        (p.x..p.x+dist).zip(p.y..p.y+dist).find_map(|p| {
+            let p = Point{ x: p.0, y: p.1 };
+            if sensors.iter().all(|sens| !sens.contains(&p)) {
+                Some(p.x * 4000000 + p.y)
+            } else {
+                None
+            }
+        })
+    }).unwrap_or(upper * 4000000)
 }
 
 fn main() {
