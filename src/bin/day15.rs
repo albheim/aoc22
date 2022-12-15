@@ -68,6 +68,10 @@ impl Sensor {
                 }
             }).collect()
     }
+
+    fn contains(&self, p: &Point) -> bool {
+        self.pos.l1_dist(p) <= self.dist
+    }
 }
 
 fn run_a(input: &str, y: i64) -> usize {
@@ -84,36 +88,41 @@ fn run_a(input: &str, y: i64) -> usize {
         .map(|sensor| sensor.closest_beacon)
         .filter(|beacon| beacon.y == y)
         .collect::<HashSet<_>>().len();
-    //println!("{:?}", sensors.iter().filter(|sensor| sensor.closest_beacon.y == y).map(|sensor| sensor.closest_beacon).collect::<Vec<Point>>());
 
-    //println!("{:?}", sensor_coverage);
-    //println!("{} {}", sensor_coverage.count(), beacons);
     sensor_coverage.count() - beacons
 }
 
-fn run_b(input: &str, upper: i64) -> usize {
+fn contains(sensors: &[Sensor], p: Point) -> bool {
+    sensors.iter().all(|sens| !sens.contains(&p))
+}
+
+fn run_b(input: &str, upper: i64) -> i64 {
     let sensors = Sensor::build(input);
-    let mut p = Point{ x: 0, y: 0 };
-    while p.y  <= upper {
-        while p.x <= upper {
-            //println!("Checking p {:?}", p);
-            let mut found = true;
-            for sens in &sensors {
-                if sens.pos.l1_dist(&p) <= sens.dist {
-                    p.x = sens.pos.x + sens.dist - i64::abs(sens.pos.y - p.y) + 1;
-                    //println!("Matched to sens {:?} with range {} from beacon {:?}, going to {:?}", sens.pos, sens.dist, sens.closest_beacon, p);
-                    found = false;
-                    break;
-                }
-            }
-            if found {
-                return (p.x * 4000000 + p.y) as usize;
-            }
-        }
-        p.x = 0;
-        p.y += 1;
+
+    if contains(&sensors, Point{ x: upper, y: 0 }) {
+        return upper * 4000000
     }
-    panic!("Didn't find solution");
+    for sens in sensors.iter() {
+        let mut p = sens.pos;
+        p.x -= sens.dist + 1;
+        if p.x < 0 {
+            p.y -= p.x;
+            p.x = 0;
+        }
+        if p.y < 0 {
+            p.x -= p.y;
+            p.y = 0;
+        }
+        let dist = i64::min(sens.dist + 1, upper - i64::max(p.x, p.y));
+        for _ in 0..=dist {
+            if contains(&sensors, p) {
+                return p.x * 4000000 + p.y
+            }
+            p.x += 1;
+            p.y += 1;
+        }
+    }
+    panic!("Shouldn't happen");
 }
 
 fn main() {
