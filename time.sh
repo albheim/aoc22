@@ -11,7 +11,7 @@ for d in $ALL_DAYS ; do
     start_time="$(date -u +%s.%N)"
     ./target/release/$d a >> /dev/null
     mid_time="$(date -u +%s.%N)"
-    ./target/release/$(basename $d) b >> /dev/null
+    ./target/release/$d b >> /dev/null
     end_time="$(date -u +%s.%N)"
     elapseda="$(bc <<<"$mid_time-$start_time")"
     elapsedb="$(bc <<<"$end_time-$mid_time")"
