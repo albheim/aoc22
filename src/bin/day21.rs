@@ -20,14 +20,6 @@ fn name2id(name: &str) -> usize {
     id
 }
 
-fn id2name(id: usize) -> String {
-    let mut name = String::new();
-    for i in 0..4 {
-        name.push(((id >> (8 * i)) & ((1 << 8) - 1)) as u8 as char)
-    }
-    name.chars().rev().collect()
-}
-
 fn calc(op: char, left: isize, right: isize) -> isize {
     match op {
         '+' => left + right,
