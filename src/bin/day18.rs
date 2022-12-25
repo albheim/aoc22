@@ -120,6 +120,6 @@ mod day18_tests {
     #[test]
     fn real_b() {
         let result = run_b(&read_data(DAY));
-        assert_eq!(result, 1507692307690);
+        assert_eq!(result, 2012);
     }
 }

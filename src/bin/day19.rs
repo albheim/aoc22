@@ -1,7 +1,7 @@
 use std::env;
 use aoc22::read_data;
 use parseline::parseln;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 const DAY: &str = "day19";
 

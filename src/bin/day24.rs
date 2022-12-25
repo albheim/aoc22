@@ -1,7 +1,7 @@
 use std::{env, fmt::Display};
 use aoc22::read_data;
 use std::collections::{VecDeque, HashSet};
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
 
 const DAY: &str = "day24";
 
